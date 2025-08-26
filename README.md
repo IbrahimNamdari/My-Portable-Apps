@@ -1,7 +1,7 @@
 # MPA (My Portable Apps)
 
 <p align="center">
-  <img src="img/icon.png" alt="MPA Icon" width="150" height="150">
+  <img src="icon.ico" alt="MPA Icon" width="150" height="150">
 </p>
 
 ## About the Project
@@ -12,12 +12,12 @@ The core objective of MPA is to provide a collection of essential and portable n
 
 ## Key Features
 
-* **Wi-Fi Profile Management**: Save and easily connect to different wireless networks.
-* **Intelligent VPN Connection**: Automatically manages and monitors the status of the integrated VPN tool.
-* **Smart Network Status Check**: Continuously monitors internet connectivity and provides detailed reports.
-* **Simple and User-Friendly UI**: Designed with PyQt6, the user interface is clean and intuitive.
-* **Advanced Logging**: Displays detailed, real-time logs that are easy to copy for troubleshooting.
-* **Portable Environment**: All tools and dependencies are packaged into a single executable file, requiring no pre-installation of Python or other prerequisites.
+- **Wi-Fi Profile Management**: Save and easily connect to different wireless networks.
+- **Intelligent VPN Connection**: Automatically manages and monitors the status of the integrated VPN tool.
+- **Smart Network Status Check**: Continuously monitors internet connectivity and provides detailed reports.
+- **Simple and User-Friendly UI**: Designed with PyQt6, the user interface is clean and intuitive.
+- **Advanced Logging**: Displays detailed, real-time logs that are easy to copy for troubleshooting.
+- **Portable Environment**: All tools and dependencies are packaged into a single executable file, requiring no pre-installation of Python or other prerequisites.
 
 ---
 
@@ -25,8 +25,8 @@ The core objective of MPA is to provide a collection of essential and portable n
 
 This application utilizes **Psiphon 3**, an open-source censorship circumvention tool, to provide VPN functionality. Psiphon 3 is designed to securely connect users to the internet in a variety of challenging network environments.
 
-* **Project**: [Psiphon 3](https://github.com/Psiphon-Inc/psiphon)
-* **Publisher**: Psiphon Inc.
+- **Project**: [Psiphon 3](https://github.com/Psiphon-Inc/psiphon)
+- **Publisher**: Psiphon Inc.
 
 ---
 
@@ -63,3 +63,4 @@ To build a standalone executable (`.exe`) from the project, use the provided `bu
 ```bash
 # In the project's root directory, run this command in cmd
 build.bat
+```
