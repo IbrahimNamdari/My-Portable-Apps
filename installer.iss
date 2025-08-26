@@ -20,7 +20,7 @@ OutputBaseFilename=MPA-Installer-2.25.826
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
-SetupIconFile=.\icon32.ico
+SetupIconFile=.\icon32px.ico
 UninstallDisplayIcon={app}\main.exe
 
 ; Additional Options
