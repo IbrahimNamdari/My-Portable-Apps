@@ -8,7 +8,7 @@ rd /s /q dist
 echo Building the application...
 pyinstaller --onefile --windowed --clean --log-level=INFO ^
 --name "MPA-Portable" ^
---icon="icon.ico" ^
+--icon="icon64.ico" ^
 --add-data "img;img" ^
 --add-data "otherapps;otherapps" ^
 --add-data "ui;ui" ^

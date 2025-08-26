@@ -1,7 +1,7 @@
 # MPA (My Portable Apps)
 
 <p align="center">
-  <img src="icon.ico" alt="MPA Icon" width="150" height="150">
+  <img src="icon64.ico" alt="MPA Icon" width="64" height="64">
 </p>
 
 ## About the Project
