@@ -11,7 +11,6 @@ pyinstaller --onefile --windowed --clean --log-level=INFO ^
 --icon="icon64px.ico" ^
 --add-data "img;img" ^
 --add-data "otherapps;otherapps" ^
---add-data "ui;ui" ^
 --add-data "core/model/data/wifi_profiles.db;core/model/data" ^
 main.py
 

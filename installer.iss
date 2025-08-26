@@ -5,8 +5,8 @@
 ; App Information
 AppId={{e72b26bc-2aad-4814-acff-732ac5daff35}
 AppName=MPA
-AppVersion=2.25.826
-AppPublisher=IbrahimND (Ebrahim Namdari)
+AppVersion=2.25.827
+AppPublisher=IbrahimNamdari (Ebrahim Namdari)
 AppPublisherURL=https://github.com/IbrahimNamdari/My-Portable-Apps
 AppSupportURL=https://github.com/IbrahimNamdari/My-Portable-Apps
 AppUpdatesURL=https://github.com/IbrahimNamdari/My-Portable-Apps
@@ -16,7 +16,7 @@ DefaultDirName={autopf}\MPA
 DefaultGroupName=MPA
 
 ; Output and Security
-OutputBaseFilename=MPA-Installer-2.25.826
+OutputBaseFilename=MPA-Installer
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
@@ -32,13 +32,12 @@ Name: runonstartup; Description: "Run MPA when Windows starts"; GroupDescription
 
 [Files]
 ; Main executable
-Source: "dist\main.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\MPA-Portable.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Other directories and files
 Source: "img\*"; DestDir: "{app}\img"; Flags: recursesubdirs createallsubdirs
 Source: "otherapps\*"; DestDir: "{app}\otherapps"; Flags: recursesubdirs createallsubdirs
 Source: "core\model\data\*"; DestDir: "{app}\core\model\data"; Flags: recursesubdirs createallsubdirs
-Source: "ui\*"; DestDir: "{app}\ui"; Flags: recursesubdirs createallsubdirs
 
 [Icons]
 ; Start Menu icon
