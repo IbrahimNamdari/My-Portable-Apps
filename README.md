@@ -12,12 +12,12 @@ The core objective of MPA is to provide a collection of essential and portable n
 
 ## Key Features
 
-- **Wi-Fi Profile Management**: Save and easily connect to different wireless networks.
-- **Intelligent VPN Connection**: Automatically manages and monitors the status of the integrated VPN tool.
-- **Smart Network Status Check**: Continuously monitors internet connectivity and provides detailed reports.
-- **Simple and User-Friendly UI**: Designed with PyQt6, the user interface is clean and intuitive.
-- **Advanced Logging**: Displays detailed, real-time logs that are easy to copy for troubleshooting.
-- **Portable Environment**: All tools and dependencies are packaged into a single executable file, requiring no pre-installation of Python or other prerequisites.
+* **Wi-Fi Profile Management**: Save and easily connect to different wireless networks.
+* **Intelligent VPN Connection**: Automatically manages and monitors the status of the integrated VPN tool.
+* **Smart Network Status Check**: Continuously monitors internet connectivity and provides detailed reports.
+* **Simple and User-Friendly UI**: Designed with PyQt6, the user interface is clean and intuitive.
+* **Advanced Logging**: Displays detailed, real-time logs that are easy to copy for troubleshooting.
+* **Portable Environment**: All tools and dependencies are packaged into a single executable file, requiring no pre-installation of Python or other prerequisites.
 
 ---
 
@@ -25,22 +25,26 @@ The core objective of MPA is to provide a collection of essential and portable n
 
 This application utilizes **Psiphon 3**, an open-source censorship circumvention tool, to provide VPN functionality. Psiphon 3 is designed to securely connect users to the internet in a variety of challenging network environments.
 
-- **Project**: [Psiphon 3](https://github.com/Psiphon-Inc/psiphon)
-- **Publisher**: Psiphon Inc.
+* **Project**: [Psiphon 3](https://github.com/Psiphon-Inc/psiphon)
+* **Publisher**: Psiphon Inc.
 
 ---
 
-## Installation and Usage
+## How to Get MPA
 
-To use MPA, you don't need to install Python or any other dependencies. Simply download and run the installer.
+There are two main ways to use MPA.
 
-1.  Download the `MPA-Installer.exe` file from the [releases page](https://github.com/IbrahimNamdari/My-Portable-Apps/releases).
+### For End-Users (Recommended)
+
+This method provides a standard and user-friendly installation experience, just like any other Windows application.
+
+1.  Download the **MPA-Installer.exe** file from the [releases page](https://github.com/IbrahimNamdari/My-Portable-Apps/releases).
 2.  Double-click the file and follow the installation steps.
-3.  An icon will be created on your desktop and in the Start Menu.
+3.  An icon will be created on your desktop and in the Start Menu for easy access.
 
-### Installing from Source (For Developers)
+### For Developers (From Source Code)
 
-If you wish to run MPA from its source code, follow these steps:
+This method is for developers who want to run the application directly from the source code.
 
 1.  **Clone the repository**:
     ```bash
@@ -56,11 +60,15 @@ If you wish to run MPA from its source code, follow these steps:
     python main.py
     ```
 
+---
+
 ## Building the Executable
 
-To build a standalone executable (`.exe`) from the project, use the provided `build.bat` script. Make sure you have PyInstaller installed (`pip install pyinstaller`).
+To create the standalone `MPA-Portable.exe` and the `MPA-Installer.exe` files, follow these steps.
 
-```bash
-# In the project's root directory, run this command in cmd
-build.bat
-```
+1.  **Build the portable executable**: Use the provided `build.bat` script to package all Python code and dependencies into a single file. This process requires PyInstaller (`pip install pyinstaller`).
+    ```bash
+    # In the project's root directory, run this command in cmd
+    build.bat
+    ```
+2.  **Build the installer**: Once the portable executable is created in the `dist` folder, use the `installer.iss` script with **Inno Setup** to generate a full installer.
