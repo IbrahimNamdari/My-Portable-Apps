@@ -222,14 +222,15 @@ class MainController(QtWidgets.QMainWindow):
             dialog = WifiListController(self)
             if dialog.exec() == QtWidgets.QDialog.DialogCode.Accepted:
                 self.network_manager.set_wifi_credentials(dialog.selected_ssid, dialog.selected_password)
-                display_text = f"{self.network_manager.current_ssid}"
-                self.ui.currentWifiLabel.setText(display_text)
+                if self.network_manager.connect_wifi():
+                    display_text = f"{self.network_manager.current_ssid}"
+                    self.ui.currentWifiLabel.setText(display_text)
 
-                if self.network_manager.is_psiphon_running():
-                    self.network_manager.stop_psiphon()
+                    if self.ui.vpnUseCheckbox:
+                        self.reset_wifi()
 
-                self.network_manager.connect_wifi()
-                self.check_all_statuses()
+                    self.check_all_statuses()
+
         except Exception as e:
             self.logger.exception("Error in handle_switch_wifi")
             show_error(f"An error occurred: {e}")
