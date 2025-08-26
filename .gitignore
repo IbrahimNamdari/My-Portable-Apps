@@ -1,0 +1,42 @@
+# IDE files
+.idea/
+
+# Virtual environments
+.venv/
+env/
+venv/
+.python-version
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# PyInstaller build and output files
+build/
+dist/
+*.spec
+!main.spec
+
+# Inno Setup output
+Output/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Database files
+db.sqlite3
+db.sqlite3-journal
+
+# Other apps, if you don't want them in the repo
+# Note: Based on our previous discussion, you might want to INCLUDE this if your app needs it.
+# Uncomment the line below to IGNORE it.
+# otherapps/
+
+# PyCharm files (already covered by .idea/, but good to be explicit)
+# .idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
