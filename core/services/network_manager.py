@@ -308,11 +308,11 @@ class NetworkManager:
             else:
                 self.logger.warning("Internet connection is inactive.")
             return status
-        except requests.exceptions.RequestException as e:
-            self.logger.error(f"Internet check failed: {e}")
+        except requests.exceptions.RequestException:
+            self.logger.error("Internet check failed.")
             return False
         except Exception as e:
-            self.logger.exception("Unexpected error in get_internet_status.")
+            self.logger.exception(f"Unexpected error in get_internet_status: {e}")
             return False
 
     def is_psiphon_running(self):

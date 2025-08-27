@@ -16,7 +16,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(900, 850)
-        Form.setMinimumSize(QtCore.QSize(900, 850))
+        Form.setMinimumSize(QtCore.QSize(1080, 720))
         Form.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setFamily("IRANSansWeb(FaNum)")
@@ -186,20 +186,20 @@ class Ui_Form(object):
         self.intervalUnitLabel.setObjectName("intervalUnitLabel")
         self.horizontalLayout_4.addWidget(self.intervalUnitLabel)
         self.gridLayout.addLayout(self.horizontalLayout_4, 8, 0, 1, 2)
-        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.vpnLabel = QtWidgets.QLabel(parent=Form)
-        self.vpnLabel.setMinimumSize(QtCore.QSize(0, 50))
-        self.vpnLabel.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.vpnLabel.setObjectName("vpnLabel")
-        self.horizontalLayout_6.addWidget(self.vpnLabel)
+
         self.vpnUseCheckbox = QtWidgets.QCheckBox(parent=Form)
         self.vpnUseCheckbox.setMinimumSize(QtCore.QSize(0, 50))
         self.vpnUseCheckbox.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.vpnUseCheckbox.setText("")
+        self.vpnUseCheckbox.setText("Use VPN in Auto Config?")
+        self.vpnUseCheckbox.setStyleSheet("""
+            QCheckBox {
+                spacing: 20px;  /* فاصله بین متن و چک‌باکس */
+            }
+        """)
         self.vpnUseCheckbox.setObjectName("vpnUseCheckbox")
-        self.horizontalLayout_6.addWidget(self.vpnUseCheckbox)
-        self.gridLayout.addLayout(self.horizontalLayout_6, 8, 2, 1, 2)
+        self.vpnUseCheckbox.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        self.gridLayout.addWidget(self.vpnUseCheckbox, 8, 2, 1, 2, Qt.AlignmentFlag.AlignLeft)
+
         self.setOnceButton = QtWidgets.QPushButton(parent=Form)
         self.setOnceButton.setMinimumSize(QtCore.QSize(0, 50))
         self.setOnceButton.setMaximumSize(QtCore.QSize(16777215, 16777215))
@@ -359,7 +359,6 @@ class Ui_Form(object):
         self.checkIntervalLabel.setText(_translate("Form", "Check interval:"))
         self.intervalSpinBox.setToolTip(_translate("Form", "Set the time interval for checking network status"))
         self.intervalUnitLabel.setText(_translate("Form", "sec"))
-        self.vpnLabel.setText(_translate("Form", "Do you want to use VPN? "))
         self.vpnUseCheckbox.setToolTip(_translate("Form", "Manually confirms network status"))
         self.setOnceButton.setToolTip(_translate("Form", "Performs a single network and VPN check"))
         self.setOnceButton.setText(_translate("Form", "Run Once"))
