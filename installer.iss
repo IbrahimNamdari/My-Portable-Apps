@@ -16,11 +16,12 @@ DefaultDirName={autopf}\MPA
 DefaultGroupName=MPA
 
 ; Output and Security
+OutputDir=release
 OutputBaseFilename=MPA-Installer
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
-SetupIconFile=.\icon32px.ico
+SetupIconFile=.\img\mpas.ico
 UninstallDisplayIcon={app}\main.exe
 
 ; Additional Options
@@ -32,7 +33,7 @@ Name: runonstartup; Description: "Run MPA when Windows starts"; GroupDescription
 
 [Files]
 ; Main executable
-Source: "dist\MPA-Portable.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "release\MPA-Portable.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 ; Other directories and files
 Source: "img\*"; DestDir: "{app}\img"; Flags: recursesubdirs createallsubdirs

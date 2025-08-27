@@ -8,6 +8,8 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+from core.utils.paths import resource_path
+
 
 class Ui_wifiList(object):
     def setupUi(self, wifiList):
@@ -59,7 +61,10 @@ class Ui_wifiList(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+
     wifiList = QtWidgets.QDialog()
+
+
     ui = Ui_wifiList()
     ui.setupUi(wifiList)
     wifiList.show()

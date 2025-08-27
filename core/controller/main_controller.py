@@ -137,6 +137,7 @@ class MainController(QtWidgets.QMainWindow):
         """
         wifi_connected, wifi_message = self.network_manager.get_wifi_status()
         internet_connected = self.network_manager.get_internet_status()
+        psiphon_connected = self.network_manager.is_psiphon_running()
 
         self.ui.wifiStatusValue.setText("Connected" if wifi_connected else "Not Connected")
         self.ui.netStatusValue.setText("Connected" if internet_connected else "Not Connected")
@@ -151,17 +152,17 @@ class MainController(QtWidgets.QMainWindow):
                 self.reset_wifi()
                 time.sleep(2)
 
-        if not self.network_manager.is_psiphon_running():
+        if self.ui.vpnUseCheckbox and not psiphon_connected:
             self.logger.info("Request to start VPN as it is not running.")
             reply = show_question(f"VPN is not connected.\nConnect VPN?", timed=True)
             if reply == QtWidgets.QMessageBox.StandardButton.Yes:
                 self.logger.info("User confirmed starting VPN.")
                 self.network_manager.start_psiphon()
-                self.ui.vpnUseCheckbox.setChecked(True)
                 time.sleep(2)
 
-        if self.network_manager.is_psiphon_running():
+        if psiphon_connected:
             self.ui.vpnUseCheckbox.setChecked(True)
+
         self.psiphon_monitor.start()
         return wifi_connected, internet_connected
 
@@ -305,6 +306,7 @@ class MainController(QtWidgets.QMainWindow):
         self.ui.intervalSpinBox.setReadOnly(True)
         self.ui.autoConfigButton.setEnabled(False)
         self.ui.stopAutoConfigButton.setEnabled(True)
+        self.ui.vpnUseCheckbox.setEnabled(False)
 
         self.autoconfig_timer.start(interval_ms)
         self.logger.info(f"Auto-configuration started with an interval of {interval} seconds.")
@@ -317,6 +319,7 @@ class MainController(QtWidgets.QMainWindow):
         self.ui.intervalSpinBox.setReadOnly(False)
         self.ui.autoConfigButton.setEnabled(True)
         self.ui.stopAutoConfigButton.setEnabled(False)
+        self.ui.vpnUseCheckbox.setEnabled(True)
         self.logger.info("Auto-configuration stopped.")
         show_info("Auto-configuration stopped.", "Success")
 

@@ -336,7 +336,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Portable Network Manager"))
+        Form.setWindowTitle(_translate("Form", "MPA (My Portable Apps)"))
         self.ssidLabel.setText(_translate("Form", "Wi-Fi Name:"))
         self.passwordLabel.setText(_translate("Form", "Wi-Fi Password:"))
         self.wifiInfoLabel.setText(_translate("Form", "Current Wi-Fi:"))
