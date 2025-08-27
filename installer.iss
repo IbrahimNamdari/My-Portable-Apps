@@ -22,7 +22,7 @@ Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin
 SetupIconFile=.\img\mpas.ico
-UninstallDisplayIcon={app}\main.exe
+UninstallDisplayIcon={app}\MPA-Portable.exe
 
 ; Additional Options
 DisableStartupPrompt=yes
@@ -42,14 +42,14 @@ Source: "core\model\data\*"; DestDir: "{app}\core\model\data"; Flags: recursesub
 
 [Icons]
 ; Start Menu icon
-Name: "{group}\MPA"; Filename: "{app}\main.exe"
+Name: "{group}\MPA"; Filename: "{app}\MPA-Portable.exe"
 ; Uninstall icon
 Name: "{group}\Uninstall MPA"; Filename: "{uninstallexe}"
 ; Desktop icon (optional)
-Name: "{autodesktop}\MPA"; Filename: "{app}\main.exe"; Tasks: desktopicon
+Name: "{autodesktop}\MPA"; Filename: "{app}\MPA-Portable.exe"; Tasks: desktopicon
 ; Startup icon (optional)
-Name: "{autostartup}\MPA"; Filename: "{app}\main.exe"; Tasks: runonstartup
+Name: "{autostartup}\MPA"; Filename: "{app}\MPA-Portable.exe"; Tasks: runonstartup
 
 [Run]
 ; Launch the application after installation
-Filename: "{app}\main.exe"; Description: "{cm:LaunchProgram,MPA}"; Flags: nowait postinstall
+Filename: "{app}\MPA-Portable.exe"; Description: "{cm:LaunchProgram,MPA}"; Flags: nowait postinstall
