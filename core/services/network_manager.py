@@ -84,7 +84,7 @@ class NetworkManager:
             return wifi_list
 
         except Exception as e:
-            self.logger.exception("General error retrieving Wi-Fi profiles.")
+            self.logger.exception(f"General error retrieving Wi-Fi profiles: {e}")
             return []
 
     def get_current_wifi(self):
@@ -116,7 +116,7 @@ class NetworkManager:
             self.logger.error(f"Error checking current Wi-Fi connection: {e}")
             return None
         except Exception as e:
-            self.logger.exception("Unexpected error in get_current_wifi.")
+            self.logger.exception(f"Unexpected error in get_current_wifi: {e}")
             return None
 
     def set_wifi_credentials(self, ssid, password):
@@ -162,7 +162,7 @@ class NetworkManager:
             self.logger.error(f"Error checking Wi-Fi status: {e}")
             return False, "Error"
         except Exception as e:
-            self.logger.exception("Unexpected error in get_wifi_status.")
+            self.logger.exception(f"Unexpected error in get_wifi_status: {e}")
             return False, "Error"
 
     def get_available_wifi(self):
@@ -191,7 +191,7 @@ class NetworkManager:
             self.logger.error(f"Error scanning for Wi-Fi networks: {e}")
             self.available_networks = []
         except Exception as e:
-            self.logger.exception("Unexpected error in get_available_wifi.")
+            self.logger.exception(f"Unexpected error in get_available_wifi: {e}")
             self.available_networks = []
 
     def connect_wifi(self):
@@ -256,7 +256,7 @@ class NetworkManager:
             self.logger.error(f"Error connecting to Wi-Fi: {e}")
             return False
         except Exception as e:
-            self.logger.exception("Unexpected error in connect_wifi.")
+            self.logger.exception(f"Unexpected error in connect_wifi: {e}")
             return False
 
     def disconnect_wifi(self):
@@ -287,7 +287,7 @@ class NetworkManager:
                 self.logger.warning("Failed to disconnect from Wi-Fi.")
             return not new_status
         except Exception as e:
-            self.logger.exception("Error disconnecting from Wi-Fi.")
+            self.logger.exception(f"Error disconnecting from Wi-Fi: {e}")
             return False
 
     def get_internet_status(self):
@@ -338,7 +338,7 @@ class NetworkManager:
             self.logger.error(f"Error checking Psiphon status: {e}")
             return False
         except Exception as e:
-            self.logger.exception("Unexpected error in is_psiphon_running.")
+            self.logger.exception(f"Unexpected error in is_psiphon_running: {e}")
             return False
 
     def start_psiphon(self):
@@ -368,7 +368,7 @@ class NetworkManager:
             show_error("Psiphon3.exe file not found. Please check the path.", "Error")
             return False
         except Exception as e:
-            self.logger.exception("Error starting Psiphon.")
+            self.logger.exception(f"Error starting Psiphon: {e}")
             return False
 
     def stop_psiphon(self):
@@ -398,7 +398,7 @@ class NetworkManager:
                 self.logger.warning("Psiphon failed to stop.")
                 return False
         except Exception as e:
-            self.logger.exception("Error stopping Psiphon.")
+            self.logger.exception(f"Error stopping Psiphon: {e}")
             return False
 
     def create_wifi_profile(self):
@@ -460,6 +460,6 @@ class NetworkManager:
             show_error("Failed to create Wi-Fi profile. Check credentials.", "Error")
             return False
         except Exception as e:
-            self.logger.exception("Unexpected error in create_wifi_profile.")
-            show_error("Failed to create Wi-Fi profile.", "Error")
+            self.logger.exception(f"Unexpected error in create_wifi_profile: {e}")
+            show_error(f"Failed to create Wi-Fi profile: {e}", "Error")
             return False

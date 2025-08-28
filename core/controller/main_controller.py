@@ -60,6 +60,13 @@ class MainController(QtWidgets.QMainWindow):
         self.ui.intervalSpinBox.setValue(20)
         self.ui.stopAutoConfigButton.setEnabled(False)
         self.ui.vpnUseCheckbox.setChecked(False)
+        self.ui.noQuestionCheckbox.setChecked(False)
+
+        self.psiphon_tunnel_path = resource_path("otherapps/psiphon-tunnel-core.exe")
+
+        self.startupinfo = subprocess.STARTUPINFO()
+        self.startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        self.startupinfo.wShowWindow = subprocess.SW_HIDE
 
         # Setup timer for auto-configuration
         self.autoconfig_timer = QtCore.QTimer(self)
@@ -137,32 +144,45 @@ class MainController(QtWidgets.QMainWindow):
         """
         wifi_connected, wifi_message = self.network_manager.get_wifi_status()
         internet_connected = self.network_manager.get_internet_status()
-        psiphon_connected = self.network_manager.is_psiphon_running()
+        vpn_use = self.ui.vpnUseCheckbox.isChecked() and internet_connected
+        question = not self.ui.noQuestionCheckbox.isChecked()
+        is_psi_runnig, is_tunneling_running = self.psiphon_monitor.check_psiphone_ui()
 
         self.ui.wifiStatusValue.setText("Connected" if wifi_connected else "Not Connected")
         self.ui.netStatusValue.setText("Connected" if internet_connected else "Not Connected")
 
-        if not internet_connected:
-            self.logger.info("Request for Wi-Fi reset due to no internet connection.")
-            reply = show_question(
-                f"Wi-Fi is connected to {self.network_manager.current_ssid} without internet.\nReset connection?",
-                timed=True)
-            if reply == QtWidgets.QMessageBox.StandardButton.Yes:
-                self.logger.info("User confirmed Wi-Fi reset.")
-                self.reset_wifi()
-                time.sleep(2)
 
-        if self.ui.vpnUseCheckbox and not psiphon_connected:
-            self.logger.info("Request to start VPN as it is not running.")
-            reply = show_question(f"VPN is not connected.\nConnect VPN?", timed=True)
-            if reply == QtWidgets.QMessageBox.StandardButton.Yes:
-                self.logger.info("User confirmed starting VPN.")
-                self.network_manager.start_psiphon()
-                time.sleep(2)
+        if vpn_use:
+            if not is_psi_runnig:
+                if question:
+                    self.logger.info("Request to start VPN as it is not running.")
+                    reply = show_question(f"VPN is not connected.\nConnect VPN?", timed=True)
+                    if reply == QtWidgets.QMessageBox.StandardButton.Yes:
+                        self.logger.info("User confirmed starting VPN.")
+                        self.network_manager.start_psiphon()
+                        time.sleep(2)
+                else:
+                    self.logger.info("Starting vpn without question.")
+                    self.network_manager.start_psiphon()
+                    time.sleep(2)
+            else:
+                if not is_tunneling_running:
+                    if question:
+                        self.logger.info("Request to start VPN tunneling.")
+                        reply = show_question(f"Tunneling has stoped.\nReset VPN?", timed=True)
+                        if reply == QtWidgets.QMessageBox.StandardButton.Yes:
+                            self.logger.info("User confirmed reset VPN.")
+                            self.reset_vpn()
+                            time.sleep(2)
+                    else:
+                        self.logger.info("Reset VPN without question.")
+                        self.reset_vpn()
+                        time.sleep(2)
 
-        if psiphon_connected:
+
+
+        if is_psi_runnig:
             self.ui.vpnUseCheckbox.setChecked(True)
-
         self.psiphon_monitor.start()
         return wifi_connected, internet_connected
 
@@ -176,14 +196,14 @@ class MainController(QtWidgets.QMainWindow):
         elif not tunnel_active:
             status_text = "Running, Tunneling Failed"
         else:
-            status_text = f"Running - {time.strftime('%H:%M')}"
+            status_text = "Running"
         self.ui.vpnStatusValue.setText(status_text)
 
         # Tunneling status
         if tunnel_active and established_connections:
-            tunneling_text = f"Succeed - Active"
+            tunneling_text = "Active"
         elif tunnel_running and not tunnel_active:
-            tunneling_text = "Tunneling - In Progress"
+            tunneling_text = "Tunneling in Progress"
         else:
             tunneling_text = "Not Tunneling"
         self.ui.vpnTunnelingValue.setText(tunneling_text)
@@ -307,6 +327,7 @@ class MainController(QtWidgets.QMainWindow):
         self.ui.autoConfigButton.setEnabled(False)
         self.ui.stopAutoConfigButton.setEnabled(True)
         self.ui.vpnUseCheckbox.setEnabled(False)
+        self.ui.noQuestionCheckbox.setEnabled(False)
 
         self.autoconfig_timer.start(interval_ms)
         self.logger.info(f"Auto-configuration started with an interval of {interval} seconds.")
@@ -320,6 +341,7 @@ class MainController(QtWidgets.QMainWindow):
         self.ui.autoConfigButton.setEnabled(True)
         self.ui.stopAutoConfigButton.setEnabled(False)
         self.ui.vpnUseCheckbox.setEnabled(True)
+        self.ui.noQuestionCheckbox.setEnabled(True)
         self.logger.info("Auto-configuration stopped.")
         show_info("Auto-configuration stopped.", "Success")
 
@@ -354,3 +376,4 @@ class MainController(QtWidgets.QMainWindow):
         It ensures that the Psiphon monitoring thread is gracefully stopped."""
         self.psiphon_monitor.stop()
         event.accept()
+

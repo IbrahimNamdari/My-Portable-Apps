@@ -63,6 +63,12 @@ class PsiphonMonitor(QThread):
             self.logger.error(f"Error checking tunnel status: {e}")
             return False
 
+    def check_tunnel_status(self):
+        return self._check_tunnel_status()
+
+    def check_psiphone_ui(self):
+        return self._check_psiphon_processes()
+
     def run(self):
         """The main loop for the monitoring thread."""
         self.monitoring = True

@@ -187,18 +187,37 @@ class Ui_Form(object):
         self.horizontalLayout_4.addWidget(self.intervalUnitLabel)
         self.gridLayout.addLayout(self.horizontalLayout_4, 8, 0, 1, 2)
 
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.horizontalLayout_5.setSpacing(100)
+
         self.vpnUseCheckbox = QtWidgets.QCheckBox(parent=Form)
         self.vpnUseCheckbox.setMinimumSize(QtCore.QSize(0, 50))
         self.vpnUseCheckbox.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.vpnUseCheckbox.setText("Use VPN in Auto Config?")
+        self.vpnUseCheckbox.setText("Use VPN:")
         self.vpnUseCheckbox.setStyleSheet("""
             QCheckBox {
-                spacing: 20px;  /* فاصله بین متن و چک‌باکس */
+                spacing: 10px;  /* فاصله بین متن و چک‌باکس */
             }
         """)
         self.vpnUseCheckbox.setObjectName("vpnUseCheckbox")
         self.vpnUseCheckbox.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
-        self.gridLayout.addWidget(self.vpnUseCheckbox, 8, 2, 1, 2, Qt.AlignmentFlag.AlignLeft)
+        self.horizontalLayout_5.addWidget(self.vpnUseCheckbox)
+
+        self.noQuestionCheckbox = QtWidgets.QCheckBox(parent=Form)
+        self.noQuestionCheckbox.setMinimumSize(QtCore.QSize(0, 50))
+        self.noQuestionCheckbox.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.noQuestionCheckbox.setText("Yes to All:")
+        self.noQuestionCheckbox.setStyleSheet("""
+            QCheckBox {
+                spacing: 10px;  /* فاصله بین متن و چک‌باکس */
+            }
+        """)
+        self.noQuestionCheckbox.setObjectName("noQuestionCheckbox")
+        self.noQuestionCheckbox.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        self.horizontalLayout_5.addWidget(self.noQuestionCheckbox)
+
+        self.gridLayout.addLayout(self.horizontalLayout_5, 8, 2, 1, 2, Qt.AlignmentFlag.AlignLeft)
 
         self.setOnceButton = QtWidgets.QPushButton(parent=Form)
         self.setOnceButton.setMinimumSize(QtCore.QSize(0, 50))
@@ -324,7 +343,8 @@ class Ui_Form(object):
         Form.setTabOrder(self.disconnectVPNButton, self.checkNetButton)
         Form.setTabOrder(self.checkNetButton, self.intervalSpinBox)
         Form.setTabOrder(self.intervalSpinBox, self.vpnUseCheckbox)
-        Form.setTabOrder(self.vpnUseCheckbox, self.setOnceButton)
+        Form.setTabOrder(self.vpnUseCheckbox, self.noQuestionCheckbox)
+        Form.setTabOrder(self.noQuestionCheckbox, self.setOnceButton)
         Form.setTabOrder(self.setOnceButton, self.autoConfigButton)
         Form.setTabOrder(self.autoConfigButton, self.stopAutoConfigButton)
         Form.setTabOrder(self.stopAutoConfigButton, self.copyLogButton)
@@ -359,7 +379,8 @@ class Ui_Form(object):
         self.checkIntervalLabel.setText(_translate("Form", "Check interval:"))
         self.intervalSpinBox.setToolTip(_translate("Form", "Set the time interval for checking network status"))
         self.intervalUnitLabel.setText(_translate("Form", "sec"))
-        self.vpnUseCheckbox.setToolTip(_translate("Form", "Manually confirms network status"))
+        self.vpnUseCheckbox.setToolTip(_translate("Form", "If you want to use vpn in process"))
+        self.noQuestionCheckbox.setToolTip(_translate("Form", "If you don't like any question in process"))
         self.setOnceButton.setToolTip(_translate("Form", "Performs a single network and VPN check"))
         self.setOnceButton.setText(_translate("Form", "Run Once"))
         self.autoConfigButton.setToolTip(_translate("Form", "Starts automatic network and VPN checks"))
